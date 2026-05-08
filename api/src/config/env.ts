@@ -1,0 +1,25 @@
+export const env = {
+  port: Number(process.env.PORT || 4000),
+  databaseUrl: process.env.DATABASE_URL!,
+  jwtSecret: process.env.JWT_SECRET || 'change-me',
+  emailVerifySecret: process.env.EMAIL_VERIFY_SECRET || 'change-me-verify',
+  togetherApiKey: process.env.TOGETHER_API_KEY!,
+  brevoApiKey: process.env.BREVO_API_KEY!,
+  stripeSecretKey: process.env.STRIPE_SECRET_KEY!,
+  stripeWebhookSecret: process.env.STRIPE_WEBHOOK_SECRET!,
+  stripePriceIdMonthly: process.env.STRIPE_PRICE_ID_MONTHLY!,
+  // Credit pack price IDs (one-time payments)
+  stripeCreditsStarterPriceId: process.env.STRIPE_CREDITS_STARTER_PRICE_ID!,
+  stripeCreditsBuilderPriceId: process.env.STRIPE_CREDITS_BUILDER_PRICE_ID!,
+  stripesCreditsPowerPriceId: process.env.STRIPE_CREDITS_POWER_PRICE_ID!,
+  frontendUrl: process.env.FRONTEND_URL || 'http://localhost:5173',
+  githubClientId: process.env.GITHUB_CLIENT_ID || '',
+  githubClientSecret: process.env.GITHUB_CLIENT_SECRET || '',
+  githubCallbackUrl: process.env.GITHUB_CALLBACK_URL || 'http://localhost:4000/api/github/callback',
+  appBaseUrl: process.env.APP_BASE_URL || 'http://localhost:4000',
+  // Railway DevTools — Anthropic
+  anthropicApiKey: process.env.ANTHROPIC_API_KEY!,
+  // Solana USDC Payments
+  solanaRpcUrl: process.env.SOLANA_RPC_URL || 'https://api.mainnet-beta.solana.com',
+  solanaMerchantWallet: process.env.SOLANA_MERCHANT_WALLET!,
+};
