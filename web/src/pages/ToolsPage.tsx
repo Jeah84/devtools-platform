@@ -2,7 +2,7 @@
 // ============================================================
 
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import JsonYamlFormatter from '../components/JsonYamlFormatter';
 import RegexTester from '../components/RegexTester';
@@ -71,7 +71,9 @@ const TABS: TabDef[] = [
 export default function ToolsPage() {
   const { user } = useAuth();
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState<Tab>('jsonyaml');
+  const [searchParams] = useSearchParams();
+  const initialTab = (searchParams.get('tab') as Tab) ?? 'jsonyaml';
+  const [activeTab, setActiveTab] = useState<Tab>(initialTab);
 
   const isPro = user?.plan === 'PRO';
 
@@ -86,6 +88,12 @@ export default function ToolsPage() {
       <div className="max-w-5xl mx-auto px-4 py-8">
         {/* Page header */}
         <div className="mb-8">
+          <button
+            onClick={() => navigate('/')}
+            className="flex items-center gap-1.5 text-xs text-gray-500 hover:text-gray-300 transition-colors mb-3"
+          >
+            <span>←</span> Back to Dashboard
+          </button>
           <h1 className="text-2xl font-bold text-white mb-1">Developer Tools</h1>
           <p className="text-sm text-gray-500">
             AI-powered tools for developers — code translation, config validation, cost estimation, and more.
