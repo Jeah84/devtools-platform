@@ -6,7 +6,7 @@ import { Logo } from '../components/Logo';
 import { useTheme, ACCENT_THEMES, type ThemeMode, type AccentTheme } from '../context/ThemeContext';
 import { useEditorPreferences, EDITOR_FONTS, EDITOR_SIZES, type EditorFont, type EditorFontSize, type EditorCursor } from '../hooks/useEditorPreferences';
 
-type Section = 'account' | 'security' | 'subscription' | 'usage' | 'appearance' | 'connected-apps';
+type Section = 'account' | 'security' | 'subscription' | 'usage' | 'appearance' | 'connected-apps' | 'help';
 
 interface UsageStats {
   monthlyCount: number;
@@ -145,6 +145,7 @@ export function SettingsPage() {
     { id: 'subscription', label: 'Subscription', icon: '⚡' },
     { id: 'usage',      label: 'Usage',      icon: '📊' },
     { id: 'connected-apps', label: 'Connected Apps', icon: '🔗' },
+    { id: 'help',           label: 'Help',           icon: '❓' },
   ];
 
   return (
@@ -649,6 +650,92 @@ export function SettingsPage() {
                     <p className="text-sm text-gray-500">Loading stats...</p>
                   )}
                 </div>
+              </div>
+            )}
+
+            {/* ── Help ── */}
+            {activeSection === 'help' && (
+              <div className="space-y-6">
+
+                {/* Code Translator */}
+                <div className="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden">
+                  <div className="px-6 py-4 border-b border-gray-800">
+                    <h2 className="font-semibold">🔤 Code Translator</h2>
+                    <p className="text-xs text-gray-500 mt-0.5">Translate code between 27 programming languages using AI</p>
+                  </div>
+                  <div className="px-6 py-5 space-y-3 text-sm text-gray-300">
+                    <p><span className="text-white font-medium">1. Paste your code</span> — drop any code into the left panel. The language is detected automatically, or you can pick it manually from the dropdown.</p>
+                    <p><span className="text-white font-medium">2. Choose a target language</span> — select the language you want to translate to from the right dropdown.</p>
+                    <p><span className="text-white font-medium">3. Click Translate</span> — the translated code appears in the right panel.</p>
+                    <p><span className="text-white font-medium">4. Push to GitHub</span> — once translated, a <span className="font-mono text-indigo-400 text-xs bg-indigo-900/30 px-1.5 py-0.5 rounded">Push</span> button appears. Click it to select a repo and push the output directly to GitHub. You'll need to connect GitHub first (see Connected Apps).</p>
+                    <p><span className="text-white font-medium">History</span> — your past translations are saved. Click <span className="font-mono text-indigo-400 text-xs bg-indigo-900/30 px-1.5 py-0.5 rounded">History</span> in the toolbar to browse and restore them.</p>
+                    <div className="bg-gray-800/60 border border-gray-700/40 rounded-lg px-4 py-3 text-xs text-gray-400">
+                      💡 Free accounts get a set number of translations per month. Credits never expire and can be purchased any time.
+                    </div>
+                  </div>
+                </div>
+
+                {/* Developer Tools */}
+                <div className="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden">
+                  <div className="px-6 py-4 border-b border-gray-800">
+                    <h2 className="font-semibold">🛠 Developer Tools</h2>
+                    <p className="text-xs text-gray-500 mt-0.5">Free tools available to all users — no credits needed</p>
+                  </div>
+                  <div className="px-6 py-5 space-y-3 text-sm text-gray-300">
+                    <p><span className="text-white font-medium">JSON / YAML Formatter</span> — paste JSON or YAML and instantly format, validate, or convert between the two formats.</p>
+                    <p><span className="text-white font-medium">Regex Tester</span> — write a regex pattern and test it against any input. Matches are highlighted in real time.</p>
+                    <p><span className="text-white font-medium">AI Code Reviewer</span> — paste any code and get an AI-powered review covering readability, bugs, security, and suggestions for improvement.</p>
+                    <p>Access these from the <span className="font-mono text-indigo-400 text-xs bg-indigo-900/30 px-1.5 py-0.5 rounded">Tools</span> menu in the top navigation bar.</p>
+                  </div>
+                </div>
+
+                {/* Railway DevTools */}
+                <div className="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden">
+                  <div className="px-6 py-4 border-b border-gray-800">
+                    <h2 className="font-semibold">🚂 Railway DevTools</h2>
+                    <p className="text-xs text-gray-500 mt-0.5">AI-powered tools for Railway deployments — 1 credit per use</p>
+                  </div>
+                  <div className="px-6 py-5 space-y-3 text-sm text-gray-300">
+                    <p><span className="text-white font-medium">Config Validator</span> — paste any Railway config file (railway.json, railway.toml, Dockerfile, nixpacks.toml, Procfile) and get a scored report with specific issues and fixes.</p>
+                    <p><span className="text-white font-medium">Cost Calculator</span> — enter your services, databases, and expected traffic to get an estimated monthly Railway infrastructure cost with optimization tips.</p>
+                    <p><span className="text-white font-medium">DB Migration Assistant</span> — tell it your database engine and current host and get a step-by-step guide to migrate your database to Railway, including CLI commands.</p>
+                    <div className="bg-yellow-900/20 border border-yellow-800/40 rounded-lg px-4 py-3 text-xs text-yellow-400">
+                      ⚡ Each Railway tool use costs 1 credit. Pro plan users have unlimited access. Buy credits any time from the Subscription tab.
+                    </div>
+                  </div>
+                </div>
+
+                {/* GitHub Integration */}
+                <div className="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden">
+                  <div className="px-6 py-4 border-b border-gray-800">
+                    <h2 className="font-semibold">🔗 GitHub Integration</h2>
+                    <p className="text-xs text-gray-500 mt-0.5">Push your work directly to any GitHub repository</p>
+                  </div>
+                  <div className="px-6 py-5 space-y-3 text-sm text-gray-300">
+                    <p><span className="text-white font-medium">Connect your account</span> — go to <button onClick={() => setActiveSection('connected-apps')} className="text-indigo-400 hover:text-indigo-300 underline">Connected Apps</button> and click Connect GitHub. You'll be redirected to GitHub to authorize the app, then brought back automatically.</p>
+                    <p><span className="text-white font-medium">Push from the translator</span> — after translating code, click the <span className="font-mono text-indigo-400 text-xs bg-indigo-900/30 px-1.5 py-0.5 rounded">Push</span> button. A panel opens showing all your repos (public and private). Select one and push.</p>
+                    <p><span className="text-white font-medium">Disconnect any time</span> — go to Connected Apps and click Disconnect to remove GitHub access.</p>
+                  </div>
+                </div>
+
+                {/* Credits & Plans */}
+                <div className="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden">
+                  <div className="px-6 py-4 border-b border-gray-800">
+                    <h2 className="font-semibold">💳 Credits & Plans</h2>
+                    <p className="text-xs text-gray-500 mt-0.5">How billing works</p>
+                  </div>
+                  <div className="px-6 py-5 space-y-3 text-sm text-gray-300">
+                    <p><span className="text-white font-medium">Free plan</span> — includes a monthly allowance of code translations. JSON/YAML, Regex, and Code Review are always free with no limits.</p>
+                    <p><span className="text-white font-medium">Credits</span> — one-time purchases that never expire. Each Railway DevTools use costs 1 credit. Credits work across all Railway tools.</p>
+                    <p><span className="text-white font-medium">Pro plan</span> — unlimited code translations, unlimited Railway DevTools, and all accent color themes unlocked. Billed monthly via Stripe.</p>
+                    <p><span className="text-white font-medium">USDC payments</span> — credits can also be purchased with USDC on Solana. Scan the QR code on the Buy Credits page with any Solana wallet.</p>
+                    <div className="flex gap-3 pt-1">
+                      <Link to="/buy-credits" className="px-3 py-1.5 text-xs bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition">Buy Credits</Link>
+                      <Link to="/pricing" className="px-3 py-1.5 text-xs border border-gray-600 hover:border-gray-500 bg-gray-800 hover:bg-gray-700 text-gray-300 rounded-lg transition">View Plans</Link>
+                    </div>
+                  </div>
+                </div>
+
               </div>
             )}
 
